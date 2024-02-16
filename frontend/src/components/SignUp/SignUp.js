@@ -11,7 +11,6 @@ const SignUp = () => {
   const navigate=useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // need to comunicate with backend need to be done by rakshith??
 
   try {
     const response = await fetch('http://localhost:5000/register', {
@@ -31,12 +30,9 @@ const SignUp = () => {
     });
 
     if (response.ok) {
-      // Handle successful registration, e.g., redirect to login page
       alert('Registration successful');
-      // create a toggle button with time stamp and then rout to login page.
       navigate('/login');
     } else {
-      // Handle registration failure, e.g., display an error message
       alert("user already exists");
      
     }

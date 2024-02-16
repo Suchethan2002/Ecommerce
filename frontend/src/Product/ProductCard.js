@@ -5,8 +5,8 @@ import {Link} from 'react-router-dom';
 const ProductCard = ({product}) => {
   const d=product.name;
   const product_name=d.replace(/\s+/g,"-");
-  console.log(product);
-  console.log(product.image_Url);
+  // console.log(product);
+  // console.log(product.image_Url);
   return (
     <div className='w-full h-[370px] bg-white rounded-lg shadow-sm p-3 relative cursor-pointer'>
       <div className='flex justify-end'> </div>

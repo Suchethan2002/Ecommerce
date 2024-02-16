@@ -17,8 +17,8 @@ const Navbar = () => {
     },
     
     {
-      title: 'FAQ',
-      url: '/faq',
+      title: 'Analytics',
+      url: '/analytics',
     },
   ];
 

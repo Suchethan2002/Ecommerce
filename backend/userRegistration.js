@@ -1,6 +1,6 @@
-const { default: mongoose } = require("mongoose");
+const { Schema,model } = require("mongoose");
 
-const UserSchema=new mongoose.Schema(
+const UserSchema=new Schema(
   {
     name:String,
     email:{type : String ,unique:true, required : true},
@@ -12,4 +12,4 @@ const UserSchema=new mongoose.Schema(
   }
 );
 
-mongoose.model("UserInfo", UserSchema);
+module.exports=model("UserInfo", UserSchema);

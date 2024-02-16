@@ -1,18 +1,26 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate} from "react-router-dom";
+import { useDispatch,useSelector } from 'react-redux';
+import { setLoggedInStatus} from "../../Redux/Actions/user";
+
+import Header from "../Layout/Header";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState("");
+  const [loggedIn,setLoggedIn]=useState(false);
   const navigate=useNavigate();
 
   const [userData,setUserData]=useState(null);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // need to comunicate with backend need to be done by rakshith??
       const response = await fetch("http://localhost:5000/login", {
         method: "POST",
         crossDomain:true,
@@ -30,18 +38,25 @@ const Login = () => {
 
       console.log(data, "userRegister");  
       
-      if (data.status === "ok") {
+      if (data.status === "ok") {       
         alert("login successful");
-        window.localStorage.setItem("token",data.data);
-        // window.location.href="./userDetails";
-      
-        navigate('/');
+        dispatch(setLoggedInStatus(true));
 
-
-
- 
+        window.localStorage.setItem("token", data.data);
       }
+      else if(data.status!=="ok")
+      {
+        alert("Wrong  Email or Password");
+      }
+      const token = window.localStorage.getItem("token");
+      
+      
   };
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/');
+    }
+  }, [isLoggedIn, navigate]);
 
 
   return (
@@ -120,7 +135,7 @@ const Login = () => {
               </div>
               <div className="text-sm">
                 <a
-                  href=".forgot-password"
+                  href="forgot-password"
                   className="font-medium text-blue-600 hover:text-blue-500"
                 >
                   Forgot your password?

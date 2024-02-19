@@ -8,8 +8,10 @@ import UserAnalyticsPage from './pages/UserAnalyticsPage';
 import Data from './components/Collections/UserAnalytics/Data';
 import productsData from './Product/Products.json';
 import ProductDetail from './Product/ProductDetail';
-
-
+import Wishlist from './pages/Wishlist';
+import Header from './components/Layout/Header';
+import CartPage from './pages/cart';
+import Profile from './pages/Profile';
 const App=()=> {
   return (
     <BrowserRouter>
@@ -21,8 +23,9 @@ const App=()=> {
       <Route path='/best-selling' element={<BestSellingPage/>}/>
       <Route path='/products' element={<ProductPage/>}/>
       <Route path="/product/:productName" element={<ProductDetail products={productsData} />} />
-
-
+      <Route path='/wishlist' element={<Wishlist/>}/>
+      <Route path='/cart' element={<CartPage/>}/>
+      <Route path='/profile' element={<Profile/>}/>
     </Routes>
     </BrowserRouter>
   );

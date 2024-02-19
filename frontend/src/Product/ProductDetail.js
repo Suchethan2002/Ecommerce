@@ -32,9 +32,9 @@ const ProductDetail = ({ products }) => {
   return (
     <div>
       <h2>{product.name}</h2>
-      <img src={product.image_Url[0].url} alt={product.name} />
+      <img style={{ width: '30%', height: '30%' }} src={product.image_Url[0].url} alt={product.name} />
       <p>{product.description}</p>
-      {/* Render other details of the product */}
+      
     </div>
   );
 };

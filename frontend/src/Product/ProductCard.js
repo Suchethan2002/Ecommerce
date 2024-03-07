@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { AiOutlineHeart} from "react-icons/ai";
 
 const ProductCard = ({ product }) => {
-  const d=product.name;
-  const product_name=d.replace(/\s+/g,"-");
+  const d = product.name;
+  const product_name = d.replace(/\s+/g, "-");
   const [isBookmarked, setIsBookmarked] = useState(false);
-  const [isAddedToCart, setIsAddedToCart] = useState(false);
+  
   const [wishlistProducts, setWishlistProducts] = useState([]);
   const [cartProducts, setCartProducts] = useState([]);
 
@@ -21,13 +22,13 @@ const ProductCard = ({ product }) => {
 
   const toggleBookmark = () => {
     setIsBookmarked((prev) => !prev);
-    
+
     // Retrieve existing wishlist items from local storage
     const existingBookmarkedProducts = JSON.parse(localStorage.getItem('bookmarkedProducts')) || [];
-    
+
     // Check if the product is already in the wishlist
     const isAlreadyBookmarked = existingBookmarkedProducts.some(p => p.id === product.id);
-  
+
     if (!isAlreadyBookmarked) {
       // Add the product to the wishlist
       const updatedBookmarkedProducts = [...existingBookmarkedProducts, product];
@@ -38,65 +39,29 @@ const ProductCard = ({ product }) => {
       localStorage.setItem('bookmarkedProducts', JSON.stringify(updatedBookmarkedProducts));
     }
   };
-  
-  const toggleCart = () => {
-    setIsAddedToCart((prev) => !prev);
-  
-    // Retrieve existing cart items from local storage
-    const existingCartProducts = JSON.parse(localStorage.getItem('cartProducts')) || [];
-  
-    // Check if the product is already in the cart
-    const isAlreadyInCart = existingCartProducts.some(p => p.id === product.id);
-  
-    if (!isAlreadyInCart) {
-      // Add the product to the cart
-      const updatedCartProducts = [...existingCartProducts, product];
-      localStorage.setItem('cartProducts', JSON.stringify(updatedCartProducts));
-    } else {
-      // Remove the product from the cart
-      const updatedCartProducts = existingCartProducts.filter(p => p.id !== product.id);
-      localStorage.setItem('cartProducts', JSON.stringify(updatedCartProducts));
-    }
-  };
+
   
 
   return (
-    
-    <div className='w-full h-[280px] bg-white rounded-lg shadow-sm p-3 relative cursor-pointer'>
-    <div className='flex justify-between items-center mb-2'>
-      <button onClick={toggleBookmark}>
-        {isBookmarked ? (
-          <svg xmlns='http://www.w3.org/2000/svg' className='h-6 w-6 text-red-500' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
-            <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M5 15l7-7 7 7' />
-          </svg>
-        ) : (
-          <svg xmlns='http://www.w3.org/2000/svg' className='h-6 w-6 text-gray-500' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
-            <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M4 6h16M4 10h16M4 14h16M4 18h16' />
-          </svg>
-        )}
-      </button>
-      <button onClick={toggleCart}>
-        {isAddedToCart ? (
-          <svg xmlns='http://www.w3.org/2000/svg' className='h-6 w-6 text-blue-500' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
-            <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M9 19l3-7 11-2-5-5-1-11-5 10-11 1 11 5 5 5zm0 0v0' />
-          </svg>
-        ) : (
-          <svg xmlns='http://www.w3.org/2000/svg' className='h-6 w-6 text-gray-500' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
-            <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M9 19l3-7 11-2-5-5-1-11-5 10-11 1 11 5 5 5zm0 0v0' />
-          </svg>
-        )}
-      </button>
-    </div>
-    <Link to={`/product/${product_name}`}>
-      {(
-        <img  src={product.image_Url[0].url} alt=""
-        className='w-full h-[170px] object-contain'/>)}
+    <div className='flex w-full bg-white rounded-lg shadow-sm p-3 relative cursor-pointer'>
+      <Link to={`/product/${product_name}`} className="flex-1">
+        <img src={product.image_Url[0].url} alt="" className='w-[200px] h-[200px] object-contain mb-3' />
         <h4 className='pb-3 font-[500]'>
-          {product.name.length>40?product.name.slice(0,40)+"...":product.name}
+          {product.name.length > 40 ? product.name.slice(0, 40) + "..." : product.name}
         </h4>
       </Link>
-  </div>
-);
+      <div className='flex flex-col items-end'>
+        <button onClick={toggleBookmark} className='p-1'>
+          {isBookmarked ? (
+            <AiOutlineHeart className='h-6 w-6 text-blue-500' />
+          ) : (
+            <AiOutlineHeart className='h-6 w-6 text-gray-500' />
+          )}
+        </button>
+        
+      </div>
+    </div>
+  );
 };
 
 export default ProductCard;

@@ -71,33 +71,27 @@ const Header = (props) => {
         )}
       </div>
       <div className="transition hidden 800px:flex items-center justify-between w-full bg-[#3321c8] h-[70px]">
-        <div
-          className={`${styles.section} relative ${styles.noramlFlex} justify-between`}
-        >
-          {/* categories */}
+        <div className={`${styles.section} relative ${styles.noramlFlex} justify-between`}>
           <div>
             <div className="relative h-[50px] mt-[10px] w-[270px] hidden 1000px:block">
               <button
                 className={`h-[100%] w-full flex justify-between items-center pl-10 bg-white font-sans text-lg font-[500] select-none rounded-t-md`}
+                onClick={() => setShowCategories(!showCategories)}
               >
-                All Categories
+                All Categories {showCategories ? <IoIosArrowUp size={20} /> : <IoIosArrowDown size={20} />}
               </button>
-              {arrow ? (
-                <IoIosArrowDown
-                  size={20}
-                  className="absolute right-2 top-4 cursor-pointer"
-                  onClick={() => setArrow(!arrow)}
-                />
-              ) : (
-                <IoIosArrowUp
-                  size={20}
-                  className="absolute right-2 top-4 cursor-pointer"
-                  onClick={() => setArrow(!arrow)}
-                />
+              {showCategories && (
+                <div className="absolute bg-white w-full top-[50px] z-10 shadow-lg">
+                  {/* Replace the below array with your categories data */}
+                  {categories.map((category) => (
+                    <Link key={category.id} to={`/category/${category.id}`} className="block px-4 py-2 hover:bg-gray-200">
+                      {category.name}
+                    </Link>
+                  ))}
+                </div>
               )}
             </div>
           </div>
-
           <div className={`${styles.noramlFlex}`}>
             <Navbar />
           </div>

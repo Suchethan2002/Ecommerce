@@ -38,6 +38,15 @@ const ProductList = () => {
         console.error('Error fetching products:', error.message);
       }
     };
+  const [products, setProducts] = useState([]);
+  const [otherProducts, setOtherProducts] = useState([]);
+
+  useEffect(() => {
+    // You can replace this with an API call to fetch data from a server
+    setProducts(productsData);
+    // Set other products data if available
+    // setOtherProducts(otherProductsData);
+  }, []);
 
     fetchProducts();
   }, [dispatch]);
@@ -49,11 +58,17 @@ const ProductList = () => {
 
   
   return (
-    <div className="container mx-auto p-4">
-      {/* <h1 className="text-3xl font-bold mb-4">Products</h1> */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+    <div>
+      {/* First grid */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', justifyItems: 'center', alignItems: 'center' }}>
         {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
 
+      {/* Second grid */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', justifyItems: 'center', alignItems: 'center' }}>
+        {otherProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
@@ -63,6 +78,8 @@ const ProductList = () => {
 };
 
 export default ProductList;
+
+
 
 
 // [

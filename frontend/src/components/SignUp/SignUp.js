@@ -1,46 +1,54 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [visible, setVisible] = useState("");
-  const navigate=useNavigate();
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
+  const [street, setStreet] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [country, setCountry] = useState("");
+  const [zip, setZip] = useState("");
+  const [visible, setVisible] = useState(false);
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-  try {
-    const response = await fetch('http://localhost:5000/register', {
+    try {
+      const response = await fetch("http://localhost:5000/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+          age,
+          gender,
+          address: { street, city, state, country, zip },
+        }),
+      });
 
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept:"application/json",
-        "Access-Control-Allow-Origin":"*",
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        password,
-      
-      }),
-    });
-
-    if (response.ok) {
-      alert('Registration successful');
-      navigate('/login');
-    } else {
-      alert("user already exists");
-     
-    }
-  } catch (error) {
-    console.error('Error during registration:', error);
-  }
     
+      if (response.ok) {
+        alert("Registration successful");
+        navigate("/login");
+      } else {
+        alert("User already exists");
+      }
+    } catch (error) {
+      console.error("Error during registration:", error);
+    }
   };
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -53,7 +61,7 @@ const SignUp = () => {
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label
-                htmlFor="email"
+                htmlFor="name"
                 className="block text-sm font-medium text-gray-700"
               >
                 Full Name
@@ -61,7 +69,7 @@ const SignUp = () => {
               <div className="mt-1">
                 <input
                   type="text"
-                  name="text"
+                  name="name"
                   autoComplete="name"
                   required
                   value={name}
@@ -119,7 +127,136 @@ const SignUp = () => {
                 )}
               </div>
             </div>
-            
+            <div>
+              <label
+                htmlFor="age"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Age
+              </label>
+              <div className="mt-1">
+                <input
+                  type="number"
+                  name="age"
+                  required
+                  value={age}
+                  onChange={(e) => setAge(e.target.value)}
+                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="gender"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Gender
+              </label>
+              <div className="mt-1">
+                <select
+                  name="gender"
+                  required
+                  value={gender}
+                  onChange={(e) => setGender(e.target.value)}
+                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                >
+                  <option value="">Select</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="street"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Street
+              </label>
+              <div className="mt-1">
+                <input
+                  type="text"
+                  name="street"
+                  required
+                  value={street}
+                  onChange={(e) => setStreet(e.target.value)}
+                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="city"
+                className="block text-sm font-medium text-gray-700"
+              >
+                City
+              </label>
+              <div className="mt-1">
+                <input
+                  type="text"
+                  name="city"
+                  required
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="state"
+                className="block text-sm font-medium text-gray-700"
+              >
+                State
+              </label>
+              <div className="mt-1">
+                <input
+                  type="text"
+                  name="state"
+                  required
+                  value={state}
+                  onChange={(e) => setState(e.target.value)}
+                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="country"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Country
+              </label>
+              <div className="mt-1">
+                <input
+                  type="text"
+                  name="country"
+                  required
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="zip"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Zip
+              </label>
+              <div className="mt-1">
+                <input
+                  type="text"
+                  name="zip"
+                  required
+                  value={zip}
+                  onChange={(e) => setZip(e.target.value)}
+                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+              </div>
+            </div>
             <div>
               <button
                 type="submit"
@@ -129,7 +266,7 @@ const SignUp = () => {
               </button>
             </div>
             <div className="flex items-center w-full">
-              <h4>already have any account?</h4>
+              <h4>Already have an account?</h4>
               <Link to="/login" className="text-blue-600 pl-2">
                 Login
               </Link>

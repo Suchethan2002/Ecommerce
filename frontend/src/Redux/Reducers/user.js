@@ -1,18 +1,22 @@
+import { createSlice } from '@reduxjs/toolkit';
+
 const initialState = {
-    isLoggedIn: false,
-  };
-  
-  const rootReducer = (state = initialState, action) => {
-    switch (action.type) {
-      case 'SET_LOGGED_IN_STATUS':
-        return {
-          ...state,
-          isLoggedIn: action.payload,
-        };
-      default:
-        return state;
-    }
-  };
-  
-  export default rootReducer;
-  
+  loggedIn: false,
+};
+
+const user = createSlice({
+  name: 'user',
+  initialState,
+  reducers: {
+    setLoggedIn: (state, action) => {
+      state.loggedIn = action.payload;
+    },
+    setLoggedOut: (state) => {
+      state.loggedIn = false;
+    },
+  },
+});
+
+export const { setLoggedIn, setLoggedOut } = user.actions;
+
+export default user.reducer;

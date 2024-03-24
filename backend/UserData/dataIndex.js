@@ -2,7 +2,7 @@ const { default: mongoose } = require("mongoose");
 const fs=require("fs");
 const db=require("../db.js");
 
-require('./UserDataSchema');
+require('../Models/UserDataSchema.js');
 const  UserData = mongoose.model('UserData') ;
 const data=JSON.parse(fs.readFileSync("D:/E-SHOP/backend/UserData/Userdata.json",'Utf8'));
 

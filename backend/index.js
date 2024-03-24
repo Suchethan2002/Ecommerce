@@ -1,10 +1,14 @@
-// Express setup
+// index.js
 const express = require("express");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const User = require("./userRegistration");
-const UserData = require("./UserData/UserDataSchema");
+const User = require("./Models/userRegistration");
+const UserData = require("./Models/UserDataSchema");
+const db = require("./db"); // Import the db.js module here
+const productRoutes = require('./Routes/ProductRoutes');
+const cartRoutes=require('./Routes/CartRoutes');
+const wishlistRoutes=require('./Routes/WishlistRoutes');
 
 const app = express();
 
@@ -12,11 +16,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const jwt_secret = "your_jwt_secret";
+app.use('/api/products', productRoutes);
+app.use("/api/cart", cartRoutes);
+app.use("/api/wishlist",wishlistRoutes)
 
-// User registration route
+
+const jwt_secret =
+  "siorehamh200323[]itsu}{||]ha--63049398whi279101nwg149diwgu002";
+  
+  // User registration route
 app.post("/register", async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password,age,gender,address } = req.body;
   const encryptPassword = await bcrypt.hash(password, 10);
   try {
     const oldUser = await User.findOne({ email });
@@ -27,8 +37,12 @@ app.post("/register", async (req, res) => {
       name,
       email,
       password: encryptPassword,
+      age,
+      gender,
+      address,
     });
     res.send({ status: "User registered successfully" });
+    
   } catch (error) {
     console.error("Error registering user:", error);
     res.status(500).send({ error: "Internal server error" });
@@ -40,12 +54,15 @@ app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email });
+    console.log(user)
+    console.log(user.address)
+
     if (!user) {
       return res.status(404).send({ error: "User not found" });
     }
     if (await bcrypt.compare(password, user.password)) {
       const token = jwt.sign({ email: user.email }, jwt_secret);
-      return res.status(200).send({ token });
+      return res.status(200).send({ user: { email: user.email, address: user.address }, token });
     } else {
       return res.status(401).send({ error: "Invalid password" });
     }
@@ -56,16 +73,7 @@ app.post("/login", async (req, res) => {
 });
 
 // Middleware to authenticate requests using JWT token
-function authenticateToken(req, res, next) {
-  const token = req.headers["authorization"];
-  if (!token) return res.status(401).send({ error: "Unauthorized" });
 
-  jwt.verify(token, jwt_secret, (err, user) => {
-    if (err) return res.status(403).send({ error: "Forbidden" });
-    req.user = user;
-    next();
-  });
-}
 
 // User activity tracking route
 // app.post("/track", authenticateToken, async (req, res) => {

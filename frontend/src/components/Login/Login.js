@@ -1,63 +1,71 @@
-import React from "react";
-import { useState,useEffect } from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate} from "react-router-dom";
-import { useDispatch,useSelector } from 'react-redux';
-import { setLoggedInStatus} from "../../Redux/Actions/user";
+import { useDispatch, useSelector } from 'react-redux';
+import { setLoggedIn } from "../../Redux/Reducers/user";
+import { setUserData } from "../../Redux/Actions/UserData"; // Import the action creator
+
 
 import Header from "../Layout/Header";
+import { BsWindowSidebar } from "react-icons/bs";
 
 const Login = () => {
-  const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const dispatch=useDispatch();
 
+  // Accessing isLoggedIn from the user slice of the state
+  const isLoggedIn = useSelector(state => state.user.loggedIn);
 
+  // console.log(isLoggedIn)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState("");
-  const [loggedIn,setLoggedIn]=useState(false);
+  // const [userData,setUserData]=useState("");
   const navigate=useNavigate();
 
-  const [userData,setUserData]=useState(null);
   const handleSubmit = async (e) => {
     e.preventDefault();
-      const response = await fetch("http://localhost:5000/login", {
-        method: "POST",
-        crossDomain:true,
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      })
-      const data = await response.json();
+    const response = await fetch("http://localhost:5000/login", {
+      method: "POST",
+      crossDomain:true,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+    const data = await response.json();
+    console.log(data)
+    
+    // console.log(data.token);
+    // console.log(data.user.address)
+    // Convert the address object to a string before storing it in localStorage
+    window.localStorage.setItem('Address',JSON.stringify(data.user.address));
 
-      console.log(data, "userRegister");  
-      
-      if (data.status === "ok") {       
-        alert("login successful");
-        dispatch(setLoggedInStatus(true));
+    
+    if (response.ok) {
+      alert("login successful");
+      // dispatch(setUserData(data.user.address) );
 
-        window.localStorage.setItem("token", data.data);
-      }
-      else if(data.status!=="ok")
-      {
-        alert("Wrong  Email or Password");
-      }
-      const token = window.localStorage.getItem("token");
-      
-      
+      dispatch(setLoggedIn(true));
+     
+      window.localStorage.setItem("token", data.token);
+    } else {
+      alert("Wrong Email or Password");
+    }
+    
   };
+  
   useEffect(() => {
     if (isLoggedIn) {
       navigate('/');
     }
   }, [isLoggedIn, navigate]);
-
+  
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">

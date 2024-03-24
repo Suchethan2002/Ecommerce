@@ -3,3 +3,6 @@ export const setLoggedInStatus = (status) => ({
     payload: status,
   });
   
+  export const logout = () => ({
+    type: 'LOGOUT',
+  });

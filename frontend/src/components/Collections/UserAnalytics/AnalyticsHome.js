@@ -1,4 +1,11 @@
 import React, { useState } from "react";
+import Account from "./Account";
+import ProductCategory from "./ProductCategory";
+import Formater, { UserEngProcess } from "./Formater";
+import Header from "../../Layout/Header";
+import Search from "./Search";
+import MonthlyTimeSpentChart from './MonthOnMonthActivity'
+import UserEngagementChart from "./UserEngamenet";
 
 export default function AnalyticsHome() {
   // State to manage the currently active page
@@ -14,17 +21,17 @@ export default function AnalyticsHome() {
   const renderPageContent = () => {
     switch (activePage) {
       case "Account":
-        return <div>account</div>;
+        return <div><Account/></div>;
       case "Address":
         return <div>Address Page Content</div>;
       case "Account Security":
         return <div>Account Security Page Content</div>;
       case "Categories":
-        return <div>Categories Page Content</div>;
+        return <div><ProductCategory/></div>;
       case "Brands":
-        return <div>Brands Page Content</div>;
+        return <div><Search/></div>;
       case "Reviews":
-        return <div>Reviews Page Content</div>;
+        return <div><MonthlyTimeSpentChart/></div>;
       case "Favourites":
         return <div>Favourites Page Content</div>;
       case "Views":
@@ -36,9 +43,9 @@ export default function AnalyticsHome() {
       case "Amount Saved":
         return <div>Amount Saved Page Content</div>;
       case "Overall":
-        return <div>Overall Page Content</div>;
+        return <div><UserEngProcess/></div>;
       default:
-        return <div>Account</div>;
+        return <div><Formater/></div>;
     }
   };
 
@@ -48,6 +55,7 @@ export default function AnalyticsHome() {
         {/* <div className="p-5 text-white text-center bg-gray-800">
           <h1>Welcome to the AnalyticsHome</h1>
         </div> */}
+        <Header/>
 
         <div className="flex">
           <div className="ml-3 mt-4 w-1/5 grid">
@@ -79,13 +87,13 @@ export default function AnalyticsHome() {
               className="p-3 border border-gray-400 bg-gray-200 hover:bg-gray-300"
               onClick={() => handlePageClick("Brands")}
             >
-              Brands
+              Search Activity
             </div>
             <div
               className="p-3 border border-gray-400 bg-gray-200 hover:bg-gray-300"
               onClick={() => handlePageClick("Reviews")}
             >
-              Reviews
+              MonthlyTimeSpent
             </div>
             <div
               className="p-3 border border-gray-400 bg-gray-200 hover:bg-gray-300"

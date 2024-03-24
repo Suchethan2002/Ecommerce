@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import ProductCategory from './ProductCategory';
 import AnalyticsHome from './AnalyticsHome';
 import Header from '../../Layout/Header';
+import udata from './data.json'
 
 const Data = () => {
   const [analyticsData, setAnalyticsData] = useState([]);
@@ -30,7 +31,7 @@ const Data = () => {
   return (
     <div>
       <Header/>
-      <AnalyticsHome Data={analyticsData} />
+      <AnalyticsHome Data={udata} />
 
     </div>
   );

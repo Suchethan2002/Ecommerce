@@ -238,11 +238,11 @@
       "image_Url": [
         {
           "public_id": "nike_air_max_front",
-          "url": "https://5.imimg.com/data5/SELLER/Default/2020/10/TJ/OD/VK/36863503/nike-air-max-270-react-phantom-university-gold-university-red-1600.jpg"
+          "url": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/126ef0df-59b7-4b82-8c25-c851ccfa219c/air-max-270-shoes-vjpNZc.png"
         },
         {
           "public_id": "nike_air_max_side",
-          "url": "https://images.unsplash.com/photo-1560313733-5a4614165e18"
+          "url": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/126ef0df-59b7-4b82-8c25-c851ccfa219c/air-max-270-shoes-vjpNZc.png"
         }
       ],
       "shop": {
@@ -260,3 +260,7 @@
       "stock": 80
     }
   ]
+
+
+
+  

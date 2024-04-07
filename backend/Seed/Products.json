@@ -258,8 +258,70 @@
       "rating": 4.7,
       "total_sell": 200,
       "stock": 80
-    }
-  ]
+    },
+      {
+        "id": "acc001",
+        "category": "accessories",
+        "description": "A stylish and classic woven straw fedora hat, perfect for sunny days. Features a comfortable sweatband and adjustable chin strap.",
+        "image_Url": "https://stetson.com/collections/hats-fedora-straw",
+        "price": 34.99,
+        "discount_price": 5,
+        "rating": 4.3,         
+        "total_sell": 20,      
+        "stock": 100,
+        "name": "Woven Straw Fedora Hat"
+      },
+      {
+        "id": "acc002",
+        "category": "accessories",
+        "description": "A spacious and versatile leather tote bag, perfect for everyday use. Features a sturdy construction, multiple compartments, and comfortable shoulder straps.",
+        "image_Url": "https://www.pinterest.com/lesleyannnoel/bags-leather-tote/",
+        "price": 129.99,
+        "discount_price": 20,
+        "rating": 4.6,
+        "total_sell": 30,
+        "stock": 50,
+        "name": "Leather Tote Bag"
+      },
+      {
+        "id": "acc003",
+        "category": "accessories",
+        "description": "Classic aviator sunglasses with a metal frame and UV protection lenses. Available in a variety of colors.",
+        "image_Url": "https://www.istockphoto.com/photos/aviator-sunglasses",
+        "price": 599,
+        "discount_price": 0,
+        "rating": 4.2,
+        "total_sell": 40,
+        "stock": 75,
+        "name": "Aviator Sunglasses"
+      },
+      {
+        "id": "acc004",
+        "category": "accessories",
+        "description": "A pair of timeless silver hoop earrings. Available in different sizes.",
+        "image_Url": "https://www.pinterest.com/ideas/silver-hoop-earrings/936930130713/",
+        "price": 199,
+        "discount_price": 0,
+        "rating": 0,
+        "total_sell": 0,
+        "stock": 150,
+        "name": "Silver Hoop Earrings"
+      },
+      {
+        "id": "acc005",
+        "category": "accessories",
+        "description": "A luxurious and versatile silk scarf. Can be worn around the neck, as a headscarf, or tied to a bag.",
+        "image_Url": "https://www.istockphoto.com/photos/silk-scarf",
+        "price": 249,
+        "discount_price": 50,
+        "rating": 4.0,
+        "total_sell": 37,
+        "stock": 80,
+        "name": "Silk Scarf"
+      }
+    ]
+    
+  
 
 
 

@@ -10,8 +10,11 @@ import Data from './components/Collections/UserAnalytics/Data';
 import ProductDetail from './Product/ProductDetail';
 import { useSelector } from 'react-redux';
 import Wishlist from './Product/Wishlist';
-import AnalyticsHome from './components/Collections/UserAnalytics/AnalyticsHome';
 import Cart from './Product/Cart';
+import OrderSummary from './components/Payment/OrderSummary'
+import CategoryDetail from './Product/CategoryDetail';
+import Payment from './components/Payment/Payment';
+import OrderPlaced from './components/Payment/OrderPlaced';
 
 const App=()=> {
   const products=useSelector(state=>state.productData.productData);
@@ -19,15 +22,18 @@ const App=()=> {
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<HomePage />}/>
-      <Route path='/analytics' element={<AnalyticsHome/>}/>
+      <Route path='/analytics' element={<UserAnalyticsPage/>}/>
       <Route path="/login" element={<LoginPage />}/>
       <Route path='/signup' element={<SignUpPage/>}/>
       <Route path='/best-selling' element={<BestSellingPage/>}/>
       <Route path='/products' element={<ProductPage/>}/>
       <Route path='/wishlist' element={<Wishlist/>}/>
       <Route path='/Cart' element={<Cart/>}></Route>
-      <Route path="/product/:productName" element={<ProductDetail  products={products}/>} />
-
+      <Route path='/ordersummary' element={<OrderSummary/>}></Route>
+      <Route path="/:productCat/:productName" element={<ProductDetail  products={products}/>} />
+      <Route path="/category/:categoryName" element={<CategoryDetail products={products}/>}/>
+      <Route path="/payment" element={<Payment/>}/>
+      <Route path='/success' element={<OrderPlaced/>}/>
 
     </Routes>
     </BrowserRouter>

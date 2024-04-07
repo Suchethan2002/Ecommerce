@@ -5,7 +5,12 @@ import Formater, { UserEngProcess } from "./Formater";
 import Header from "../../Layout/Header";
 import Search from "./Search";
 import MonthlyTimeSpentChart from './MonthOnMonthActivity'
+import PurchaseBehaviorChart from "./ATExpenditure";
 import UserEngagementChart from "./UserEngamenet";
+import PieChart from "./Views";
+import ChangePasswordForm from "./AccountSecurity";
+import AreaChart from "./Revenue";
+import Address from "./Address";
 
 export default function AnalyticsHome() {
   // State to manage the currently active page
@@ -21,27 +26,26 @@ export default function AnalyticsHome() {
   const renderPageContent = () => {
     switch (activePage) {
       case "Account":
-        return <div><Account/></div>;
+        return <div>hjck</div>;
       case "Address":
-        return <div>Address Page Content</div>;
-      case "Account Security":
-        return <div>Account Security Page Content</div>;
+        return <div>Address Page Content <Address/></div>;
+      // case "Account Security":
+      //   return <div><ChangePasswordForm/></div>;
       case "Categories":
-        return <div><ProductCategory/></div>;
+        return <div>average pageview of category<ProductCategory/></div>;
       case "Brands":
         return <div><Search/></div>;
       case "Reviews":
         return <div><MonthlyTimeSpentChart/></div>;
-      case "Favourites":
-        return <div>Favourites Page Content</div>;
+      
       case "Views":
-        return <div>Views Page Content</div>;
+        return <div>Views Page pie chart Content<PieChart/></div>;
       case "Products":
         return <div>Products Page Content</div>;
       case "All Time Expenditure":
-        return <div>All Time Expenditure Page Content</div>;
+        return <div>purchase behaviour<PurchaseBehaviorChart/></div>;
       case "Amount Saved":
-        return <div>Amount Saved Page Content</div>;
+        return <div>Revenue <AreaChart/></div>;
       case "Overall":
         return <div><UserEngProcess/></div>;
       default:
@@ -71,12 +75,12 @@ export default function AnalyticsHome() {
             >
               Address
             </div>
-            <div
+            {/* <div
               className="p-3 border border-gray-400 bg-gray-200 hover:bg-gray-300"
               onClick={() => handlePageClick("Account Security")}
             >
-              Account Security
-            </div>
+              Account Security */}
+            {/* </div> */}
             <div
               className="p-3 border border-gray-400 bg-gray-200 hover:bg-gray-300"
               onClick={() => handlePageClick("Categories")}
@@ -95,12 +99,7 @@ export default function AnalyticsHome() {
             >
               MonthlyTimeSpent
             </div>
-            <div
-              className="p-3 border border-gray-400 bg-gray-200 hover:bg-gray-300"
-              onClick={() => handlePageClick("Favourites")}
-            >
-              Favourites
-            </div>
+            
             <div
               className="p-3 border border-gray-400 bg-gray-200 hover:bg-gray-300"
               onClick={() => handlePageClick("Views")}

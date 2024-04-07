@@ -9,7 +9,7 @@ const db = require("./db"); // Import the db.js module here
 const productRoutes = require('./Routes/ProductRoutes');
 const cartRoutes=require('./Routes/CartRoutes');
 const wishlistRoutes=require('./Routes/WishlistRoutes');
-
+// const passwordRoute=require('./Routes/ChangePasswordRoute')
 const app = express();
 
 // Middleware setup
@@ -19,6 +19,7 @@ app.use(express.json());
 app.use('/api/products', productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/wishlist",wishlistRoutes)
+// app.use("/api/auth",passwordRoute)
 
 
 const jwt_secret =

@@ -24,6 +24,7 @@
             {
                 "type": "product_view",
                 "product_id": 123,
+                "category": "electronics",
                 "timestamp": "2022-01-01T08:04:24Z"
             },
             {
@@ -38,6 +39,7 @@
                 "quantity": 1,
                 "original_price": 600,
                 "discounted_price": 550,
+                "category": "electronics",
                 "status": "completed",
                 "timestamp": "2022-01-01T08:07:05Z"
             },
@@ -77,6 +79,7 @@
             {
                 "type": "product_view",
                 "product_id": 456,
+                "category": "clothing",
                 "timestamp": "2022-01-03T10:34:35Z"
             },
             {
@@ -91,6 +94,7 @@
                 "quantity": 1,
                 "original_price": 40,
                 "discounted_price": 35,
+                "category": "clothing",
                 "status": "completed",
                 "timestamp": "2022-01-03T10:37:20Z"
             },
@@ -130,6 +134,7 @@
             {
                 "type": "product_view",
                 "product_id": 789,
+                "category": "accessories",
                 "timestamp": "2022-01-05T15:49:56Z"
             },
             {
@@ -147,6 +152,7 @@
             {
                 "type": "product_view",
                 "product_id": 890,
+                "category": "accessories",
                 "timestamp": "2022-01-05T15:54:13Z"
             },
             {
@@ -161,9 +167,11 @@
                 "timestamp": "2022-01-05T15:57:07Z",
                 "category": "accessories"
             },
+            
             {
                 "type": "product_view",
                 "product_id": 901,
+                "category": "accessories",
                 "timestamp": "2022-01-05T15:58:34Z"
             },
             {
@@ -178,6 +186,7 @@
                 "quantity": 2,
                 "original_price": 100,
                 "discounted_price": 90,
+                "category": "accessories",
                 "status": "completed",
                 "timestamp": "2022-01-05T16:01:30Z"
             },
@@ -188,6 +197,7 @@
                 "original_price": 50,
                 "discounted_price": 45,
                 "status": "completed",
+                "category": "accessories",
                 "timestamp": "2022-01-05T16:03:01Z"
             },
             {
@@ -197,6 +207,7 @@
                 "original_price": 70,
                 "discounted_price": 65,
                 "status": "completed",
+                "category": "clothing",
                 "timestamp": "2022-01-05T16:04:29Z"
             },
             {
@@ -237,6 +248,11 @@
                 "timestamp": "2022-08-07T12:17:05Z"
             },
             {
+                "type": "search",
+                "query": "Mobiles",
+                "timestamp": "2022-08-07T12:17:10Z"
+            },
+            {
                 "type": "pageview",
                 "url": "/category/footwear/product/234",
                 "timestamp": "2022-08-07T12:18:23Z",
@@ -245,6 +261,7 @@
             {
                 "type": "product_view",
                 "product_id": 234,
+                "category": "footwear",
                 "timestamp": "2022-08-07T12:19:50Z"
             },
             {
@@ -284,12 +301,19 @@
             {
                 "type": "product_view",
                 "product_id": 345,
+                "category": "electronics",
                 "timestamp": "2022-07-10T14:02:03Z"
             },
             {
                 "type": "product_view",
                 "product_id": 456,
+                "category": "electronics",
                 "timestamp": "2022-07-10T14:03:21Z"
+            },
+            {
+                "type": "search",
+                "query": "T-Shirts",
+                "timestamp": "2022-07-10T14:03:50Z"
             },
             {
                 "type": "pageview",
@@ -300,11 +324,13 @@
             {
                 "type": "product_view",
                 "product_id": 567,
+                "category": "clothing",
                 "timestamp": "2022-07-10T14:05:57Z"
             },
             {
                 "type": "product_view",
                 "product_id": 678,
+                "category": "clothing",
                 "timestamp": "2022-07-10T14:07:15Z"
             },
             {
@@ -316,6 +342,7 @@
             {
                 "type": "product_view",
                 "product_id": 789,
+                "category": "accessories",
                 "timestamp": "2022-07-10T14:09:51Z"
             },
             {
@@ -327,21 +354,25 @@
             {
                 "type": "product_view",
                 "product_id": 890,
+                "category": "footwear",
                 "timestamp": "2022-07-10T14:12:27Z"
             },
             {
                 "type": "product_view",
                 "product_id": 901,
+                "category": "footwear",
                 "timestamp": "2022-07-10T14:13:45Z"
             },
             {
                 "type": "product_view",
                 "product_id": 912,
+                "category": "footwear",
                 "timestamp": "2022-07-10T14:15:03Z"
             },
             {
               "type": "product_view",
-              "product_id": 912,
+              "product_id": 902,
+              "category": "home-decor",
               "timestamp": "2022-07-10T14:15:03Z"
           },
             {
@@ -353,16 +384,24 @@
             {
                 "type": "product_view",
                 "product_id": 923,
+                "category": "holiday-specials",
                 "timestamp": "2022-07-10T14:17:39Z"
             },
             {
                 "type": "product_view",
                 "product_id": 934,
+                "category": "holiday-specials",
                 "timestamp": "2022-07-10T14:18:57Z"
+            },
+            {
+                "type": "search",
+                "query": "T-Shirts",
+                "timestamp": "2022-07-10T14:19:31Z"
             },
             {
                 "type": "product_view",
                 "product_id": 945,
+                "category": "holiday-specials",
                 "timestamp": "2022-07-10T14:20:15Z"
             },
             {
@@ -388,6 +427,11 @@
                 "timestamp": "2022-02-15T09:32:00Z"
             },
             {
+                "type": "search",
+                "query": "T-Shirts",
+                "timestamp": "2022-02-15T09:32:40Z"
+            },
+            {
                 "type": "pageview",
                 "url": "/category/footwear/product/123",
                 "timestamp": "2022-02-15T09:33:18Z",
@@ -396,6 +440,7 @@
             {
                 "type": "product_view",
                 "product_id": 123,
+                "category": "footwear",
                 "timestamp": "2022-02-15T09:34:45Z"
             },
             {
@@ -413,6 +458,7 @@
             {
                 "type": "product_view",
                 "product_id": 234,
+                "category": "accessories",
                 "timestamp": "2022-02-15T09:38:57Z"
             },
             {
@@ -452,6 +498,7 @@
             {
                 "type": "product_view",
                 "product_id": 456,
+                "category": "electronics",
                 "timestamp": "2022-03-20T13:49:39Z"
             },
             {
@@ -469,6 +516,7 @@
             {
                 "type": "product_view",
                 "product_id": 567,
+                "category": "clothing",
                 "timestamp": "2022-03-20T13:53:33Z"
             },
             {
@@ -497,11 +545,13 @@
             {
                 "type": "product_view",
                 "product_id": 678,
+                "category": "seasonal-wear",
                 "timestamp": "2022-04-25T11:02:13Z"
             },
             {
                 "type": "product_view",
                 "product_id": 789,
+                "category": "seasonal-wear",
                 "timestamp": "2022-04-25T11:03:31Z"
             },
             {
@@ -521,6 +571,7 @@
             {
                 "type": "product_view",
                 "product_id": 890,
+                "category": "home-decor",
                 "timestamp": "2022-04-25T11:07:25Z"
             },
             {
@@ -534,5 +585,63 @@
                 "timestamp": "2022-04-25T11:10:01Z"
             }
         ]
-    }
+    },
+    {
+        "user_id": 123,
+        "session_id": "session009",
+        "start_timestamp": "2023-10-26T15:22:00Z",
+        "events": [
+          {
+            "type": "pageview",
+            "url": "/products/electronics",
+            "category": "electronics",
+            "timestamp": "2023-10-26T15:22:15Z"
+          },
+          {
+            "type": "product_view",
+            "product_id": 345,
+            "category": "electronics",
+            "timestamp": "2023-10-26T15:23:07Z"
+          },
+          {
+            "type": "product_view",
+            "product_id": 567,
+            "category": "electronics",
+            "timestamp": "2023-10-26T15:23:48Z"
+          },
+          {
+            "type": "add_to_cart",
+            "product_id": 567,
+            
+            "quantity": 2,
+            "timestamp": "2023-10-26T15:24:21Z"
+          },
+          {
+            "type": "pageview",
+            "url": "/category/clothing",
+            "category": "clothing",
+            "timestamp": "2023-10-26T15:25:13Z"
+          },
+          {
+            "type": "product_view",
+            "product_id": 234,
+            "category": "clothing",
+            "timestamp": "2023-10-26T15:25:45Z"
+          },
+          {"type":"purchase",
+            "product_id":"234",
+            "quantity": 1,
+            "original_price": 70,
+            "discounted_price": 65,    
+            "category": "clothing",    
+            "status":"completed",
+            "timestamp":"2023-10-26T15:26:00Z"
+        },
+          {
+            "type": "end_session",
+            "timestamp": "2023-10-26T15:26:37Z"
+          }
+        ]
+      }
+      
   ]

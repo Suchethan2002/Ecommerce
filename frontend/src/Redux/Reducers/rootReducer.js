@@ -6,6 +6,7 @@ import UserReducer from './UserDataReducer.js'
 import ProductReducer from './ProductDataReducer.js';
 import wishlistReducer from './wishlistReducer';
 import cartReducer from './CartReducer.js';
+import eventsReducer from './EventReducers.js';
 const rootReducer = combineReducers({
   user: user,
   views: viewsReducer,
@@ -13,6 +14,8 @@ const rootReducer = combineReducers({
   productData:ProductReducer,
   wishlist: wishlistReducer,
   cart:cartReducer,
+  events: eventsReducer,
+
 
 });
 

@@ -9,7 +9,6 @@ const ProductCategory = () => {
     useEffect(() => {
         if (!data) return;
 
-        // Aggregate total page views for each category
         const categoryPageViews = {};
         data.forEach(d => {
             if (categoryPageViews.hasOwnProperty(d.pageview_category)) {
@@ -66,22 +65,17 @@ const ProductCategory = () => {
                     .attr('text-anchor', 'middle')
                     .attr('font-size', '12px')
                     .attr('fill', 'black')
-                    .text(`${d}: ${categoryPageViews[d].toFixed(2)}`); // Rounded to 2 decimal points
+                    .text(`${d}: ${categoryPageViews[d].toFixed(2)}`);
 
-                // Prevent overlapping of tooltips
                 const textWidth = tooltip.node().getBBox().width;
                 let textX = x(d) + x.bandwidth() / 2 - textWidth / 2;
-
-                // Adjust position if tooltip extends beyond SVG width
                 if (textX < 0) {
                     textX = 0;
                 } else if (textX + textWidth > width) {
                     textX = width - textWidth;
                 }
-
                 tooltip.attr('x', textX);
 
-                // Remove tooltip if it still extends beyond SVG width
                 if (textX < 0 || textX + textWidth > width) {
                     tooltip.remove();
                 }
@@ -92,7 +86,16 @@ const ProductCategory = () => {
 
     }, [data]);
 
-    return <svg ref={svgRef} style={{ marginTop: "40px", display: "block" }}></svg>;
+    return (
+        <div>
+            <svg ref={svgRef} style={{ marginTop: "40px", display: "block" }}></svg>
+            <div style={{ marginTop: "20px" }}>
+                <p>This graph shows the distribution of page views across different product categories.</p>
+                <p>The x-axis represents the product categories, while the y-axis indicates the total time spent (in minutes).</p>
+                <p>Hover over each bar to view the exact amount of time spent on that category.</p>
+            </div>
+        </div>
+    );
 };
 
 export default ProductCategory;

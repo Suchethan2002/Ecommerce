@@ -1,28 +1,32 @@
 const mongoose = require("mongoose");
 const ProductDataModel = require("../Models/productDataModel");
-const productData =require("./Products.json")
+const productData = require("./Products.json");
 
 const mongoURI = "mongodb+srv://20211a05c2:Shiva2k3@eco.4gf33f5.mongodb.net/?retryWrites=true&w=majority";
 
-async function updateImageUrl() {
-  try {
-    await mongoose.connect(mongoURI);
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+        console.log("Connected to MongoDB");
+        // Loop through products and check if each exists in the database
+        productData.forEach(async (product) => {
+            try {
+                const { id } = product;
 
-    for (const product of productData) {
-      const { id, image_Url } = product;
-      await ProductDataModel.findOneAndUpdate(
-        { id: id },
-        { $set: { image_Url: image_Url[0].url } },
-        { new: true }
-      );
-      console.log(`Updated image_Url for product with ID ${id}`);
-    }
-    console.log('All image_Url updated successfully!');
-  } catch (error) {
-    console.error('Error updating image_Url:', error);
-  } finally {
-    mongoose.disconnect();
-  }
-}
+                // Check if product with same ID exists in the database
+                const existingProduct = await ProductDataModel.findOne({ id });
 
-updateImageUrl();
+                if (!existingProduct) {
+                    // If product doesn't exist, insert it into the database
+                    await ProductDataModel.create(product);
+                    console.log(`Added product with ID ${id} to the database.`);
+                } else {
+                    console.log(`Product with ID ${id} already exists in the database.`);
+                }
+            } catch (error) {
+                console.error("Error occurred while processing product:", error);
+            }
+        });
+    })
+    .catch((error) => {
+        console.error("Error connecting to MongoDB:", error);
+    });

@@ -1,5 +1,5 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -21,7 +21,9 @@ import {
   selectTotalViews,
 } from "../Redux/Reducers/viewSlice";
 import Cart from "./Cart";
-import { addToCart, removeFromCart,fetchCart } from "../Redux/Actions/CartAction";
+import { addEvent } from '../Redux/Actions/EventActions';
+
+import { addToCart, removeFromCart, fetchCart } from "../Redux/Actions/CartAction";
 
 const ProductCard = ({ product }) => {
   const d = product.name;
@@ -34,28 +36,20 @@ const ProductCard = ({ product }) => {
   const totalViews = useSelector(selectTotalViews);
   const [productData, setProductData] = useState(null);
 
-  
-  if (!cart) {
-    return <div>loading</div>; // Or you can render a loading spinner or message
-  }
 
-
-
+  const logEvent = (type, productId) => {
+    const timestamp = new Date().toISOString(); // Get current timestamp
+    dispatch(addEvent({ type, product_id: productId, timestamp }));
+  };
   const handleView = () => {
     dispatch({ type: "ADD_VIEW", productId: product.id });
-    const timestamp = new Date().toISOString(); // Get current timestamp
-    const data = {
-      type: 'product_view',
-      product_id: product.id,
-      timestamp: timestamp,
-    };
-    console.log(data); // Log data to console
-    setProductData(data); 
+
+    logEvent('product_view', product.id); // Log product view event
+    // Log data to console
+    // Log page view event with URL
+
   };
-
-
-
-  const data = [
+   const data = [
     {
       product_id: product.id,
       totalViews,
@@ -66,18 +60,32 @@ const ProductCard = ({ product }) => {
   const viewData = JSON.stringify(data);
   sessionStorage.setItem("ViewData", viewData);
 
+
+
   const handleWishlist = () => {
     if (wishlist.includes(product.id)) {
+      logEvent('remove_from_wishlist', product.id); // Log product view event
+
       dispatch(removeFromWishlist(product.id));
     } else {
       dispatch(addToWishlist(product.id));
+      logEvent('add_to_wishlist', product.id); // Log product view event
+
     }
   };
+
   const handleCart = () => {
+
     if (cart.includes(product.id)) {
+      logEvent('remove_from_cart', product.id); // Log product view event
+
+
       dispatch(removeFromCart(product.id));
     } else {
       dispatch(addToCart(product.id));
+      logEvent('add_to_cart', product.id); // Log product view event
+
+      
     }
   };
 
@@ -85,7 +93,7 @@ const ProductCard = ({ product }) => {
     <>
       <div className="w-full h-[350px] bg-white rounded-lg shadow-sm p-3 relative cursor-pointer">
         <div className="flex justify-end"></div>
-        <Link to={`/product/${product_name}`} onClick={handleView}>
+        <Link to={`/${product.category}/${product_name}`} onClick={handleView}>
           <img
             src={product.image_Url}
             alt=""
@@ -111,6 +119,13 @@ const ProductCard = ({ product }) => {
             <span className="font-[400] text-[17px] text-[#68d284]">
               {product.total_sell} sold
             </span>
+          </div>
+          <div>
+            <Link to="/ordersummary">
+              <button style={{ backgroundColor: "black", color: "white", height: "30px", width: "120px", borderRadius: "10px", marginBottom: '20px' }}>
+                Buy Now
+              </button>
+            </Link>
           </div>
         </Link>
         {wishlist.includes(product.id) ? (

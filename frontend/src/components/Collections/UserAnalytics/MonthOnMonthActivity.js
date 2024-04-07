@@ -1,11 +1,18 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import * as d3 from 'd3';
 
 const MonthlyTimeSpentChart = () => {
     const svgRef = useRef();
+    const [selectedYear, setSelectedYear] = useState(null);
 
     const data = JSON.parse(window.sessionStorage.getItem("data"));
+
     useEffect(() => {
+        if (!data) return;
+
+        // Clear previous graph
+        d3.select(svgRef.current).selectAll("*").remove();
+
         // Parse the data
         data.forEach(d => {
             d.monthYear = d.month + ' ' + d.year;
@@ -24,9 +31,12 @@ const MonthlyTimeSpentChart = () => {
             return months.indexOf(a.monthYear.split(' ')[0]) - months.indexOf(b.monthYear.split(' ')[0]);
         });
 
+        // Filter data based on selected year
+        const filteredData = selectedYear ? formattedData.filter(d => d.monthYear.split(' ')[1] === selectedYear) : formattedData;
+
         // Set up the dimensions
         const margin = { top: 50, right: 50, bottom: 70, left: 50 }; // Adjusted bottom margin
-        const width = 500 - margin.left - margin.right;
+        const width = 700 - margin.left - margin.right;
         const height = 500 - margin.top - margin.bottom;
 
         // Select the SVG element
@@ -38,12 +48,12 @@ const MonthlyTimeSpentChart = () => {
 
         // Define scales
         const x = d3.scaleBand()
-            .domain(formattedData.map(d => d.monthYear))
+            .domain(filteredData.map(d => d.monthYear))
             .range([0, width])
             .padding(0.1);
 
         const y = d3.scaleLinear()
-            .domain([0, d3.max(formattedData, d => d.totalTime)]).nice()
+            .domain([0, d3.max(filteredData, d => d.totalTime)]).nice()
             .range([height, 0]);
 
         // Draw X axis
@@ -63,7 +73,7 @@ const MonthlyTimeSpentChart = () => {
 
         // Draw line
         svg.append("path")
-            .datum(formattedData)
+            .datum(filteredData)
             .attr("fill", "none")
             .attr("stroke", "steelblue")
             .attr("stroke-width", 1.5)
@@ -74,16 +84,32 @@ const MonthlyTimeSpentChart = () => {
 
         // Draw dots
         svg.selectAll("dot")
-            .data(formattedData)
+            .data(filteredData)
             .enter().append("circle")
             .attr("fill", "steelblue")
             .attr("cx", d => x(d.monthYear) + x.bandwidth() / 2)
             .attr("cy", d => y(d.totalTime))
             .attr("r", 5);
-    }, [data]);
+    }, [data, selectedYear]);
+
+    // Function to handle year selection change
+    const handleYearChange = (event) => {
+        setSelectedYear(event.target.value);
+    };
+
+    // Get unique years from the data
+    const years = [...new Set(data.map(d => d.year))].sort();
 
     return (
-        <svg ref={svgRef} style={{ marginTop: "40px", display: "block" }}></svg>
+        <div>
+            <select onChange={handleYearChange}>
+                <option value="">All Years</option>
+                {years.map(year => (
+                    <option key={year} value={year}>{year}</option>
+                ))}
+            </select>
+            <svg ref={svgRef} style={{ marginTop: "40px", display: "block" }}></svg>
+        </div>
     );
 };
 
